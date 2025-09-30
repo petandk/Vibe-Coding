@@ -182,7 +182,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - **Flipper Zero Community** - For the amazing development tools and documentation
 - **uFBT Developers** - For making Flipper Zero development accessible
-- **Beta Testers** - For patience during the iterative development process
+- **Beta Testers (aka petandk)** - For patience during the iterative development process
 - **AI Pair Programming** - Demonstrating the power of human-AI collaboration in software development
 
 ## 🔗 Links
@@ -195,3 +195,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 **Made with ❤️ by AI-Human collaboration**  
 _Developed through iterative problem-solving, user feedback, and continuous optimization_
+
