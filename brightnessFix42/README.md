@@ -1,10 +1,10 @@
 # Solución de Brillo para Hardware Mac en Ubuntu (Sin Sudo)
 
-Este repositorio proporciona una solución simple y efectiva para mapear las teclas de función F1 y F2 en hardware Mac ejecutando una versión modificada de Ubuntu, permitiendo controlar el brillo de la pantalla sin necesidad de permisos de `sudo`.
+Este repositorio proporciona una solución simple y efectiva para mapear las teclas de función F1 y F2 en el hardware Mac ejecutando la versión modificada de Ubuntu de 42 Barcelona, permitiendo controlar el brillo de la pantalla sin necesidad de permisos de `sudo`.
 
 ## El Problema
 
-En algunas configuraciones de Ubuntu sobre hardware Mac, las teclas de función F1 y F2 no se reconocen correctamente o no realizan la acción esperada (controlar el brillo). Específicamente, se ha observado que:
+En algunas configuraciones de Ubuntu sobre hardware Mac con los nuevos teclados de la marca LMP, las teclas de función F1 y F2 no se reconocen correctamente o no realizan la acción esperada (controlar el brillo). Específicamente, se ha observado que:
 
 - La tecla **F1** envía el `keycode 78` (identificado erróneamente como Scroll Lock).
 - La tecla **F2** envía el `keycode 127` (identificado como Pause).
