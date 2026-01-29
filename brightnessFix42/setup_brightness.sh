@@ -17,9 +17,12 @@ keycode 127 = XF86MonBrightnessUp
 EOF
 
 # Load the new .Xmodmap configuration
-xmodmap "$XMODMAP_FILE"
+xmodmap "$XMODMAP_FILE" &
 
 echo "El archivo .Xmodmap ha sido creado en $XMODMAP_FILE y se ha aplicado."
-echo "Para que estos cambios persistan después de reiniciar, añade este script a 'Startup Applications' o 'Aplicaciones al inicio'."
+echo "Para que estos cambios persistan después de reiniciar la sesión, añade este script a 'Startup Applications' o 'Aplicaciones al inicio'."
 echo "Puedes hacerlo buscando 'Startup Applications' en tu menú de aplicaciones, y añadiendo una nueva entrada con el comando:"
-echo "bash $HOME/Desktop/brightnessFix/setup_brightness.sh"
+echo "bash \$HOME/goinfre/brightnessFix42/setup_brightness.sh"
+
+# Exit the script to close the terminal window if it was opened automatically
+exit 0
