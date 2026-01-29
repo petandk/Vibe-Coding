@@ -4,7 +4,7 @@ Este repositorio proporciona una solución simple y efectiva para mapear las tec
 
 ## El Problema
 
-En algunas configuraciones de Ubuntu sobre hardware Mac, las teclas de función F1 y F2 no se reconocen correctamente o no realizan la acción esperada (controlar el brillo). Específicamente, se ha observado que:
+En los teclados de Ubuntu marca LMP de 42 para hardware Mac, las teclas de función F1 y F2 no se reconocen correctamente o no realizan la acción esperada (controlar el brillo). Específicamente, se ha observado que:
 
 - La tecla **F1** envía el `keycode 78` (identificado erróneamente como Scroll Lock).
 - La tecla **F2** envía el `keycode 127` (identificado como Pause).
@@ -52,21 +52,18 @@ Sigue estos pasos para aplicar la solución:
     echo "El archivo .Xmodmap ha sido creado en $XMODMAP_FILE y se ha aplicado."
     echo "Para que estos cambios persistan después de reiniciar la sesión, añade este script a 'Startup Applications' o 'Aplicaciones al inicio'."
     echo "Puedes hacerlo buscando 'Startup Applications' en tu menú de aplicaciones, y añadiendo una nueva entrada con el comando:"
-    echo "bash \$HOME/Desktop/Vibe-Coding/brightnessFix42/setup_brightness.sh"
+    echo "bash \$HOME/Desktop/brightnessFix42/setup_brightness.sh"
     ```
 
-    **Archivo: `README.md`** (Este archivo que estás leyendo)
-    Puedes copiar todo el contenido de este archivo `README.md` y pegarlo en tu propio archivo `README.md`.
-
 2.  **Haz que el script `setup_brightness.sh` sea ejecutable**:
-    (Asumiendo que creaste el archivo `setup_brightness.sh` en el directorio correcto, por ejemplo, `$HOME/Desktop/Vibe-Coding/brightnessFix42/`)
+    (Asumiendo que creaste el archivo `setup_brightness.sh` en el directorio correcto, por ejemplo, `$HOME/Desktop/brightnessFix42/`)
     ```bash
-    chmod +x $HOME/Desktop/Vibe-Coding/brightnessFix42/setup_brightness.sh
+    chmod +x $HOME/Desktop/brightnessFix42/setup_brightness.sh
     ```
 
 3.  **Ejecuta el script:**
     ```bash
-    bash $HOME/Desktop/Vibe-Coding/brightnessFix42/setup_brightness.sh
+    bash $HOME/Desktop/brightnessFix42/setup_brightness.sh
     ```
     Este comando creará el archivo `.Xmodmap` en tu directorio `HOME` y aplicará los cambios de mapeo de teclado inmediatamente. Verás un mensaje de confirmación en la terminal.
 
@@ -77,7 +74,7 @@ Sigue estos pasos para aplicar la solución:
     -   En el campo "Nombre" (Name), puedes poner algo como: `Configuración de Brillo Mac`
     -   En el campo "Comando" (Command), introduce la ruta completa a tu script:
         ```
-        bash $HOME/Desktop/Vibe-Coding/brightnessFix42/setup_brightness.sh
+        bash $HOME/Desktop/brightnessFix42/setup_brightness.sh
         ```
     -   Puedes dejar el campo "Comentario" (Comment) en blanco o añadir una descripción.
     -   Haz clic en "Añadir" o "Add" para guardar la entrada.
