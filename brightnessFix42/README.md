@@ -24,7 +24,7 @@ Esta solución utiliza `xmodmap`, una utilidad estándar de X11 que permite reas
 
 Sigue estos pasos para aplicar la solución:
 
-1.  **Crea los archivos necesarios**: Dado que este proyecto está dentro de una estructura más amplia, puedes crear los archivos directamente o copiando el contenido a continuación.
+1.  **Crea los archivos necesarios**: Dado que este proyecto está dentro de una estructura más amplia, puedes crear los archivos directamente o copiando el contenido a continuación. Se recomienda ubicar la carpeta `brightnessFix42` dentro de tu directorio `~/goinfre` para asegurar persistencia.
 
     **Archivo: `setup_brightness.sh`**
     ```bash
@@ -52,18 +52,18 @@ Sigue estos pasos para aplicar la solución:
     echo "El archivo .Xmodmap ha sido creado en $XMODMAP_FILE y se ha aplicado."
     echo "Para que estos cambios persistan después de reiniciar la sesión, añade este script a 'Startup Applications' o 'Aplicaciones al inicio'."
     echo "Puedes hacerlo buscando 'Startup Applications' en tu menú de aplicaciones, y añadiendo una nueva entrada con el comando:"
-    echo "bash \$HOME/Desktop/brightnessFix42/setup_brightness.sh"
+    echo "bash \$HOME/goinfre/brightnessFix42/setup_brightness.sh"
     ```
 
 2.  **Haz que el script `setup_brightness.sh` sea ejecutable**:
-    (Asumiendo que creaste el archivo `setup_brightness.sh` en el directorio correcto, por ejemplo, `$HOME/Desktop/brightnessFix42/`)
+    (Asumiendo que creaste el archivo `setup_brightness.sh` en el directorio correcto, por ejemplo, `$HOME/goinfre/brightnessFix42/`)
     ```bash
-    chmod +x $HOME/Desktop/brightnessFix42/setup_brightness.sh
+    chmod +x $HOME/goinfre/brightnessFix42/setup_brightness.sh
     ```
 
 3.  **Ejecuta el script:**
     ```bash
-    bash $HOME/Desktop/brightnessFix42/setup_brightness.sh
+    bash $HOME/goinfre/brightnessFix42/setup_brightness.sh
     ```
     Este comando creará el archivo `.Xmodmap` en tu directorio `HOME` y aplicará los cambios de mapeo de teclado inmediatamente. Verás un mensaje de confirmación en la terminal.
 
@@ -74,7 +74,7 @@ Sigue estos pasos para aplicar la solución:
     -   En el campo "Nombre" (Name), puedes poner algo como: `Configuración de Brillo Mac`
     -   En el campo "Comando" (Command), introduce la ruta completa a tu script:
         ```
-        bash $HOME/Desktop/brightnessFix42/setup_brightness.sh
+        bash $HOME/goinfre/brightnessFix42/setup_brightness.sh
         ```
     -   Puedes dejar el campo "Comentario" (Comment) en blanco o añadir una descripción.
     -   Haz clic en "Añadir" o "Add" para guardar la entrada.
