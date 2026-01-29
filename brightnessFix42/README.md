@@ -14,7 +14,7 @@ bash -c "sleep 5 && xmodmap -e 'keycode 78 = XF86MonBrightnessDown' && xmodmap -
 ```
 
 Por qué y notas rápidas
-- `sleep 5` da tiempo a que el servidor gráfico y el entorno de escritorio terminen de iniciarse antes de aplicar los mapeos.
+- `sleep 5` da tiempo a que el servidor gráfico y el entorno de escritorio terminen de iniciarse antes de aplicar los mapeos. (sin esto no funciona, aunque he conseguido que funcione con solo 3).
 - `xmodmap -e '...'` aplica el mapeo directamente a la sesión X actual.
 - Las reasignaciones hechas con `xmodmap` son por sesión: se aplican al iniciar sesión y deben recargarse en cada inicio de sesión (por eso se usa la entrada en Autostart).
 - Si tu sesión usa Wayland en lugar de Xorg, `xmodmap` puede no funcionar; en ese caso habrá que usar una solución específica para el compositor/Wayland.
