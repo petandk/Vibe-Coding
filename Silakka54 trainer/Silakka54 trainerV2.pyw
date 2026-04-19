@@ -57,7 +57,8 @@ class UltimateTrainer:
         '\\': ('KC_BSLASH', False), '|': ('KC_BSLASH', True), ';': ('KC_SCOLON', False), ':': ('KC_SCOLON', True),
         "'": ('KC_QUOTE', False), '"': ('KC_QUOTE', True), ',': ('KC_COMMA', False), '<': ('KC_COMMA', True),
         '.': ('KC_DOT', False), '>': ('KC_DOT', True), '/': ('KC_SLASH', False), '?': ('KC_SLASH', True),
-        '`': ('KC_GRAVE', False), '~': ('KC_GRAVE', True), ' ': ('KC_SPACE', False), '\n': ('KC_ENTER', False)
+        '`': ('KC_GRAVE', False), '~': ('KC_GRAVE', True), ' ': ('KC_SPACE', False), 
+        '↵': ('KC_ENTER', False), '\n': ('KC_ENTER', False) # Añadido soporte explícito para el símbolo visual
     }
 
     DUAL_LABELS = {
@@ -83,7 +84,6 @@ class UltimateTrainer:
         self.root = root
         self.root.title("Ultimate Coder Trainer")
         
-        # QoL: Centrado automático de la ventana
         win_w, win_h = 1100, 650
         screen_w = self.root.winfo_screenwidth()
         screen_h = self.root.winfo_screenheight()
@@ -94,7 +94,6 @@ class UltimateTrainer:
         self.root.configure(bg=self.COLORS["bg_main"])
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
         
-        # QoL: Auto-foco para teclear directamente
         self.root.focus_force()
         
         self.is_fullscreen = False
@@ -262,7 +261,7 @@ class UltimateTrainer:
         combo.append(self.get_physical_key_label(r, c))
         
         hint_text = " + ".join([f"[{k}]" for k in combo])
-        visual_char = "↵ (Salto de línea)" if target_char == "\n" else target_char
+        visual_char = "↵ (Salto de línea)" if target_char in ("\n", "↵") else target_char
         
         self.hint_display.config(text=f"💡 {visual_char}   ➜   {hint_text}", fg=self.COLORS["accent"])
 
@@ -425,7 +424,7 @@ class UltimateTrainer:
         if self.word_count > random.randint(3, 8):
             self.word_count = 0
             self.capitalize_next = True 
-            return w + "\n"
+            return w + "↵\n" # INYECTA EL SÍMBOLO VISUAL + SALTO REAL
         return w + " "
 
     def get_words(self):
@@ -548,7 +547,8 @@ class UltimateTrainer:
     def handle_keypress(self, event):
         if event.keysym in ("BackSpace", "Shift_L", "Shift_R", "Caps_Lock", "Escape", "Control_L", "Alt_L", "Alt_R", "Win_L", "Win_R", "F11", "F5", "F1"): return
         
-        char = "\n" if event.keysym == "Return" else event.char
+        # Inyecta visual + salto al presionar Enter
+        char = "↵\n" if event.keysym == "Return" else event.char
         if not char or len(self.typed_buffer) >= len(self.full_text): return
 
         if self.current_mode == "alphabet":
@@ -573,7 +573,11 @@ class UltimateTrainer:
 
     def handle_backspace(self, event):
         if self.current_mode != "alphabet" and len(self.typed_buffer) > 0:
-            self.typed_buffer = self.typed_buffer[:-1]
+            # Borrado seguro si nos equivocamos y habíamos metido el Enter (que son 2 caracteres)
+            if self.typed_buffer.endswith("↵\n"):
+                self.typed_buffer = self.typed_buffer[:-2]
+            else:
+                self.typed_buffer = self.typed_buffer[:-1]
             self.update_display()
 
 if __name__ == "__main__":
