@@ -24,4 +24,4 @@ Un entrenador de mecanografía ligero y avanzado construido en Python (Tkinter),
 3. Ejecuta el entrenador:
 
 ```bash
-python kbpracticeV2.pyw
+python "Silakka54 trainerV2.pyw"
