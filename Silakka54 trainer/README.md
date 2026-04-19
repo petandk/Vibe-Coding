@@ -25,3 +25,20 @@ Un entrenador de mecanografía ligero y avanzado construido en Python (Tkinter),
 
 ```bash
 python "Silakka54 trainerV2.pyw"
+```
+
+## ⌨️ Controles
+
+- **`F1`**: Activa/Desactiva el Asistente Inteligente de símbolos.
+- **`F5`**: Reinicia el texto y la práctica actual.
+- **`F11`**: Alterna entre el modo ventana y pantalla completa.
+
+## 📝 Notas sobre el Asistente Inteligente
+
+El sistema de pistas está diseñado para ser poco intrusivo:
+- Solo aparece para **símbolos de programación**. Ignorará deliberadamente el alfabeto normal y los espacios para forzarte a aprenderlos.
+- Distingue claramente si el salto final de una palabra es un `Espacio` o un `Salto de Línea (↵)`.
+- Reacciona en tiempo real, incluso si retrocedes (borras) para corregir un error anterior.
+
+## 🤝 Contribuciones
+¡Las *Pull Requests* son bienvenidas! Si tienes ideas para mejorar la precisión del lector de Vial o añadir nuevos modos de juego, siéntete libre de contribuir.
