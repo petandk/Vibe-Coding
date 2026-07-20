@@ -15,29 +15,30 @@ Si alguna vez te has quedado en blanco durante un examen de programación estric
 ## ✨ Características
 
 *   **👻 Opacidad Fantasma:** Tu código objetivo aparece como un tenue "fantasma" en un tema oscuro. Puedes ajustar el control deslizante de opacidad si quieres jugar en modo extremo y apenas ver la solución.
-*   **🛑 Cero Perdón:** Si escribes el carácter equivocado, se vuelve de un rojo furioso y te bloquea para que no puedas avanzar hasta que presiones Retroceso (Backspace) y lo arregles. No puedes engañar al sistema.
-*   **🔍 El Revelador de Espacios en Blanco:** Porque mezclar tabulaciones y espacios es un pecado mortal. La aplicación resalta los espacios normales con un fondo gris tenue y las tabulaciones con un fondo azul profundo. Nunca más tendrás que adivinar.
-*   **⏭️ Salto de Comentarios Automático:** No deberías tener que memorizar comentarios. La app usa magia de expresiones regulares para saltar automáticamente sobre bloques `/* */`, `//`, `#`, `"""`, y `<!-- -->` en C, C++, Python, Bash, Makefiles, Go, HTML y más.
-*   **🧠 Ordenamiento Inteligente C/C++:** El ordenamiento alfabético estándar pone los archivos `.c` antes que los `.h`, lo cual es una ofensa profunda al orden natural de la programación. Esta app usa una lógica de ordenamiento personalizada para asegurar que practiques tus cabeceras (`.h`/`.hpp`) *antes* que tus archivos de implementación (`.c`/`.cpp`).
-*   **🚀 Flujo Continuo:** Cuando terminas un archivo, una ventana emergente sugiere inmediatamente el siguiente archivo lógico en la carpeta. Presiona `[Enter]` para empezarlo, o `[S]` para saltar al siguiente.
+*   **🛑 Cero Perdón:** Si escribes el carácter equivocado, se vuelve de un rojo furioso y te bloquea para que no puedas avanzar hasta que presiones Retroceso (Backspace) y lo arregles.
+*   **🔍 El Revelador de Espacios en Blanco:** Porque mezclar tabulaciones y espacios es un pecado mortal. La aplicación resalta los espacios normales con un fondo gris tenue y las tabulaciones con un fondo azul profundo.
+*   **⏭️ Salto de Comentarios Automático:** La app usa magia de expresiones regulares para saltar automáticamente sobre bloques de comentarios (`/* */`, `//`, `#`, `"""`, `<!-- -->`) en C, C++, Python, Bash, Makefiles, Go, HTML y más.
+*   **🧠 Ordenamiento Inteligente:** Lógica personalizada para asegurar que practiques tus cabeceras (`.h`/`.hpp`) *antes* que tus archivos de implementación (`.c`/`.cpp`).
+*   **🚀 Flujo Continuo:** Al terminar un archivo, una ventana sugiere el siguiente archivo lógico. Presiona `[Enter]` para continuar, o `[S]` para saltar al siguiente, manteniendo siempre el archivo seleccionado en el sidebar.
+*   **📊 Seguimiento de Progreso:** Indicadores en tiempo real que muestran tu línea actual, el progreso de caracteres escritos y una barra de porcentaje para que sepas exactamente cuánto te falta.
+*   **📂 Acceso Rápido:** Al hacer clic en "Open Folder", el selector se abre por defecto directamente en tu **Escritorio (Desktop)** para que empieces a trabajar de inmediato.
 
 ## 🛠️ Cómo usarlo
 
 1.  Asegúrate de tener Python 3 instalado en tu sistema.
-2.  Tkinter suele venir incluido con Python, pero si estás en Linux, es posible que necesites instalarlo (ej. `sudo apt install python3-tk`).
-3.  Ejecuta la aplicación:
+2.  Ejecuta la aplicación:
     ```bash
     python3 muscle_tutor.py
     ```
-4.  Haz clic en **"Open Folder"** en la barra lateral y selecciona un directorio que contenga el código que quieres memorizar.
-5.  Selecciona un archivo en el árbol de directorios y empieza a escribir.
+3.  Haz clic en **"Open Folder"** y selecciona tu proyecto.
+4.  Selecciona un archivo en el árbol de directorios y empieza a escribir.
 
 ## ⌨️ Atajos de Teclado
 
 *   **`Enter`**: Inicia el siguiente archivo cuando la ventana de finalización está abierta.
 *   **`S`**: Salta el archivo sugerido actualmente y prepara el siguiente.
-*   **`Escape`**: Cierra la ventana emergente de finalización para que puedas navegar por la barra lateral manualmente.
-*   **`Tab`**: Realmente inserta una tabulación (a diferencia de los IDEs estándar que la convierten en espacios... te estoy mirando a ti, VSCode).
+*   **`Escape`**: Cierra la ventana emergente de finalización.
+*   **`Tab`**: Inserta una tabulación real.
 
 ## 📝 Últimas Palabras
 
