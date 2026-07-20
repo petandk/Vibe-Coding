@@ -114,15 +114,12 @@ class CodingTutorApp(tk.Tk):
         self.text_widget.pack(side="left", fill="both", expand=True)
         
         # --- Tag Priority Configuration ---
-        # Tags defined later naturally have higher priority when layered.
-        self.text_widget.tag_config("space_mark", background="#2A2A2A") # Faint grey for spaces
-        self.text_widget.tag_config("tab_mark", background="#1D3B4D")   # Muted deep blue for tabs
+        self.text_widget.tag_config("space_mark", background="#2A2A2A")
+        self.text_widget.tag_config("tab_mark", background="#1D3B4D")
         self.text_widget.tag_config("correct", foreground=self.green_color)
-        
-        # Incorrect is defined last so the red background overrides the whitespace backgrounds
         self.text_widget.tag_config("incorrect", foreground=self.red_color, background=self.red_bg)
         
-        self.text_widget.bind("<Key>", self.handle_keypress)
+        self.text_widget.bind("<KeyPress>", self.handle_keypress)
 
     def toggle_sidebar(self):
         if self.sidebar_visible:
@@ -134,8 +131,28 @@ class CodingTutorApp(tk.Tk):
             self.toggle_btn.config(text="◀ Hide Sidebar")
             self.sidebar_visible = True
 
+    def select_file_in_tree(self, filepath):
+        """Find and select a file in the sidebar treeview by its path."""
+        target = os.path.normpath(filepath)
+
+        def search_children(parent=''):
+            for child in self.tree.get_children(parent):
+                values = self.tree.item(child, 'values')
+                if values and len(values) >= 2 and values[1] == 'file':
+                    item_path = os.path.normpath(values[0])
+                    if item_path == target:
+                        self.tree.selection_set(child)
+                        self.tree.focus(child)
+                        self.tree.see(child)
+                        return True
+                if search_children(child):
+                    return True
+            return False
+
+        search_children()
+
     def open_folder(self):
-        folder_path = filedialog.askdirectory(title="Select Project Folder")
+        folder_path = filedialog.askdirectory(title="Select Project Folder", initialdir=os.path.expanduser("~/Desktop"))
         if folder_path:
             for item in self.tree.get_children():
                 self.tree.delete(item)
@@ -198,6 +215,15 @@ class CodingTutorApp(tk.Tk):
         self.skip_intervals = []
         self.close_overlay()
         
+        # Clear text widget and recreate tags to avoid stale references
+        self.text_widget.delete("1.0", tk.END)
+        self.text_widget.tag_delete("ghost", "correct", "incorrect", "space_mark", "tab_mark")
+        self.text_widget.tag_config("space_mark", background="#2A2A2A")
+        self.text_widget.tag_config("tab_mark", background="#1D3B4D")
+        self.text_widget.tag_config("correct", foreground=self.green_color)
+        self.text_widget.tag_config("incorrect", foreground=self.red_color, background=self.red_bg)
+        self.update_opacity(self.opacity_slider.get())
+        
         # --- Language Agnostic Comment Parsing ---
         ext = os.path.splitext(filepath)[1].lower()
         basename = os.path.basename(filepath).lower()
@@ -216,7 +242,6 @@ class CodingTutorApp(tk.Tk):
             for match in re.finditer(pattern, self.target_text):
                 self.skip_intervals.append((match.start(), match.end()))
         
-        self.text_widget.delete("1.0", tk.END)
         self.text_widget.insert("1.0", self.target_text)
         self.text_widget.tag_add("ghost", "1.0", tk.END)
         
@@ -227,7 +252,6 @@ class CodingTutorApp(tk.Tk):
             elif char == '\t':
                 self.text_widget.tag_add("tab_mark", f"1.0 + {i} chars")
         
-        self.update_opacity(self.opacity_slider.get())
         self.text_widget.mark_set("insert", "1.0")
         self.text_widget.focus_set()
         
@@ -337,8 +361,10 @@ class CodingTutorApp(tk.Tk):
     def handle_keypress(self, event):
         if self.is_completed:
             if event.keysym == 'Return' and self.next_file_path:
+                self.select_file_in_tree(self.next_file_path)  # ← NEW
                 self.load_file(self.next_file_path)
             elif event.keysym.lower() == 's' and self.next_file_path:
+                self.select_file_in_tree(self.next_file_path)  # ← NEW
                 self.show_completion_overlay(search_from_path=self.next_file_path)
             elif event.keysym == 'Escape':
                 self.close_overlay()
