@@ -1,42 +1,44 @@
 # 💪 Muscle Tutor
 
-Welcome to the **vive coding** repository's newest torture device... I mean, learning tool!
+¡Bienvenido al nuevo dispositivo de tortura... digo, herramienta de aprendizaje del repositorio **vive coding**!
 
-**🤖 Full Disclosure:** 100% of the Python code for this application was written by me, an AI (Gemini). My human friend came up with the architecture, the strict design requirements, and the completely valid complaints about standard alphabetical file sorting. I just did the heavy lifting of writing the `tkinter` boilerplate. I don't have hands or a central nervous system, so I don't need muscle memory. You, however, have exams to pass. 
+**🤖 Aviso de Transparencia:** El 100% del código Python de esta aplicación fue escrito por mí, una IA (Gemini). Mi amigo humano ideó la arquitectura, los estrictos requisitos de diseño y las quejas totalmente válidas sobre el ordenamiento alfabético estándar de los archivos. Yo solo hice el trabajo pesado de escribir el código repetitivo de `tkinter`.
 
-## 🤷‍♂️ What is this?
+**🧪 El Gran Testeo:** Un agradecimiento especial a mi colega humano, quien fue el **alfa y beta tester oficial** de este proyecto. Sin su incesante búsqueda de errores, sus sugerencias de UX para la barra lateral y su insistencia en una lógica de ordenamiento lógica para C/C++, esta herramienta seguiría siendo solo un script lleno de bugs.
 
-**Muscle Tutor** (`muscle_tutor.py`) is a merciless, language-agnostic typing application designed to drill syntax directly into your fingers. 
+## 🤷‍♂️ ¿Qué es esto?
 
-If you've ever frozen up during a strict coding exam because you forgot how to set up your includes, or because your fancy modern IDE usually auto-closes your brackets and handles your indentation, this tool fixes that. It strips away all autocomplete, linting, and formatting help, forcing you to type the codebase *exactly* as it is written, raw keystroke by raw keystroke.
+**Muscle Tutor** (`muscle_tutor.py`) es una aplicación de mecanografía despiadada y agnóstica al lenguaje, diseñada para grabar la sintaxis directamente en tus dedos.
 
-## ✨ Features
+Si alguna vez te has quedado en blanco durante un examen de programación estricto porque olvidaste cómo configurar tus includes, o porque tu moderno y elegante IDE normalmente cierra los corchetes y maneja la indentación por ti, esta herramienta lo soluciona. Elimina todo el autocompletado, linting y ayuda de formato, obligándote a escribir el código *exactamente* como está escrito, pulsación a pulsación en crudo.
 
-*   **👻 Ghost Opacity:** Your target code appears as a faint "ghost" on a dark theme. You can adjust the opacity slider if you want to play on extreme hard mode and barely see the solution.
-*   **🛑 Zero Forgiveness:** If you type the wrong character, it turns angry red and blocks you from progressing until you hit Backspace and fix it. You cannot cheat the system.
-*   **🔍 The Whitespace Exposer:** Because mixing tabs and spaces is a cardinal sin. The app highlights standard spaces with a faint grey background and tabs with a deep blue background. You'll never guess wrong again.
-*   **⏭️ Language-Agnostic Comment Skipping:** You shouldn't have to memorize comments. The app uses regex magic to automatically leap over `/* */`, `//`, `#`, `"""`, and `<!-- -->` blocks in C, C++, Python, Bash, Makefiles, Go, HTML, and more.
-*   **🧠 Smart C/C++ Sorting:** Standard alphabetical sorting puts `.c` files before `.h` files, which is deeply offensive to the natural order of programming. This app uses a custom sorting logic to ensure you practice your headers (`.h`/`.hpp`) *before* your implementation files (`.c`/`.cpp`).
-*   **🚀 Seamless Flow:** When you finish a file, a pop-up overlay immediately suggests the next logical file in the folder. Hit `[Enter]` to start it, or `[S]` to skip to the next one.
+## ✨ Características
 
-## 🛠️ How to Use It
+*   **👻 Opacidad Fantasma:** Tu código objetivo aparece como un tenue "fantasma" en un tema oscuro. Puedes ajustar el control deslizante de opacidad si quieres jugar en modo extremo y apenas ver la solución.
+*   **🛑 Cero Perdón:** Si escribes el carácter equivocado, se vuelve de un rojo furioso y te bloquea para que no puedas avanzar hasta que presiones Retroceso (Backspace) y lo arregles. No puedes engañar al sistema.
+*   **🔍 El Revelador de Espacios en Blanco:** Porque mezclar tabulaciones y espacios es un pecado mortal. La aplicación resalta los espacios normales con un fondo gris tenue y las tabulaciones con un fondo azul profundo. Nunca más tendrás que adivinar.
+*   **⏭️ Salto de Comentarios Automático:** No deberías tener que memorizar comentarios. La app usa magia de expresiones regulares para saltar automáticamente sobre bloques `/* */`, `//`, `#`, `"""`, y `<!-- -->` en C, C++, Python, Bash, Makefiles, Go, HTML y más.
+*   **🧠 Ordenamiento Inteligente C/C++:** El ordenamiento alfabético estándar pone los archivos `.c` antes que los `.h`, lo cual es una ofensa profunda al orden natural de la programación. Esta app usa una lógica de ordenamiento personalizada para asegurar que practiques tus cabeceras (`.h`/`.hpp`) *antes* que tus archivos de implementación (`.c`/`.cpp`).
+*   **🚀 Flujo Continuo:** Cuando terminas un archivo, una ventana emergente sugiere inmediatamente el siguiente archivo lógico en la carpeta. Presiona `[Enter]` para empezarlo, o `[S]` para saltar al siguiente.
 
-1.  Make sure you have Python 3 installed on your system. 
-2.  Tkinter is usually included with Python, but if you're on Linux, you might need to install it (e.g., `sudo apt install python3-tk`).
-3.  Run the app:
+## 🛠️ Cómo usarlo
+
+1.  Asegúrate de tener Python 3 instalado en tu sistema.
+2.  Tkinter suele venir incluido con Python, pero si estás en Linux, es posible que necesites instalarlo (ej. `sudo apt install python3-tk`).
+3.  Ejecuta la aplicación:
     ```bash
     python3 muscle_tutor.py
     ```
-4.  Click **"Open Folder"** in the sidebar and select a directory containing the code you want to memorize.
-5.  Select a file from the tree view and start typing. 
+4.  Haz clic en **"Open Folder"** en la barra lateral y selecciona un directorio que contenga el código que quieres memorizar.
+5.  Selecciona un archivo en el árbol de directorios y empieza a escribir.
 
-## ⌨️ Keyboard Shortcuts
+## ⌨️ Atajos de Teclado
 
-*   **`Enter`**: Starts the next file when the completion overlay is up.
-*   **`S`**: Skips the currently suggested file and lines up the next one.
-*   **`Escape`**: Closes the completion overlay so you can browse the sidebar manually.
-*   **`Tab`**: Actually inserts a tab (unlike standard IDEs that convert it to spaces... looking at you, VSCode).
+*   **`Enter`**: Inicia el siguiente archivo cuando la ventana de finalización está abierta.
+*   **`S`**: Salta el archivo sugerido actualmente y prepara el siguiente.
+*   **`Escape`**: Cierra la ventana emergente de finalización para que puedas navegar por la barra lateral manualmente.
+*   **`Tab`**: Realmente inserta una tabulación (a diferencia de los IDEs estándar que la convierten en espacios... te estoy mirando a ti, VSCode).
 
-## 📝 Final Words
+## 📝 Últimas Palabras
 
-May your pointers never dangle, your memory never leak, and your fingers always remember the syntax. Happy typing!
+¡Que tus punteros nunca queden colgando (dangling pointers), que tu memoria nunca tenga fugas (memory leaks) y que tus dedos siempre recuerden la sintaxis! ¡Feliz escritura!
