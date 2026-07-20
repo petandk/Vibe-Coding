@@ -11,11 +11,14 @@ class CodingTutorApp(tk.Tk):
         self.title("Muscle Tutor")
         self.geometry("1100x700")
         self.configure(bg="#1E1E1E")
-        
+
+        self.iconname("Muscle Tutor")
+
         # Application State
         self.target_text = ""
         self.current_index = 0
         self.has_error = False
+        self.error_count = 0
         self.sidebar_visible = True
         self.current_filepath = None
         self.is_completed = False
@@ -92,23 +95,51 @@ class CodingTutorApp(tk.Tk):
                                     command=self.toggle_sidebar)
         self.toggle_btn.pack(side="left", padx=(0, 15))
 
-        tk.Label(top_bar, text="Solution Opacity:", bg="#1E1E1E", fg="white").pack(side="left")
+        # --- Checkboxes ---
+        self.show_line_numbers = tk.BooleanVar(value=False)
+        self.show_line_progress = tk.BooleanVar(value=False)
+        self.show_percent = tk.BooleanVar(value=False)
+
+        cb_style = {"bg": "#1E1E1E", "fg": "white", "selectcolor": "#1E1E1E", 
+                    "activebackground": "#1E1E1E", "activeforeground": "white",
+                    "relief": "flat", "highlightthickness": 0}
+
+        tk.Checkbutton(top_bar, text="Lines", variable=self.show_line_numbers, 
+                       command=self.update_display_options, **cb_style).pack(side="left", padx=5)
+        tk.Checkbutton(top_bar, text="Progress", variable=self.show_line_progress, 
+                       command=self.update_display_options, **cb_style).pack(side="left", padx=5)
+        tk.Checkbutton(top_bar, text="%", variable=self.show_percent, 
+                       command=self.update_display_options, **cb_style).pack(side="left", padx=5)
+
+        self.info_label = tk.Label(top_bar, text="", bg="#1E1E1E", fg="#888888", font=("Consolas", 11))
+        self.info_label.pack(side="right", padx=10)
+
+        # --- Opacity Slider ---
+        tk.Label(top_bar, text="Opacity:", bg="#1E1E1E", fg="white").pack(side="left", padx=(15, 5))
         self.opacity_slider = tk.Scale(top_bar, from_=0, to=100, orient="horizontal", 
                                        bg="#1E1E1E", fg="white", highlightthickness=0, 
                                        troughcolor="#333333", activebackground="#094771",
-                                       command=self.update_opacity, length=200)
+                                       command=self.update_opacity, length=150)
         self.opacity_slider.set(20)
-        self.opacity_slider.pack(side="left", padx=10)
+        self.opacity_slider.pack(side="left", padx=5)
 
+        # Text area
         text_frame = tk.Frame(self.right_frame, bg="#1E1E1E")
         text_frame.pack(fill="both", expand=True, padx=10, pady=(0, 5))
+
+        # Line numbers text widget (between sidebar and text)
+        self.line_numbers_widget = tk.Text(text_frame, bg="#252526", fg="#555555", 
+                                           font=("Consolas", 14), borderwidth=0, 
+                                           highlightthickness=0, width=4, state="disabled",
+                                           padx=2, cursor="arrow")
+        self.line_numbers_widget.pack(side="left", fill="y")
 
         self.text_scroll = ttk.Scrollbar(text_frame, orient="vertical")
         self.text_widget = tk.Text(text_frame, bg="#1E1E1E", fg="white", 
                                    font=("Consolas", 14), insertbackground="white", 
                                    borderwidth=0, highlightthickness=0,
-                                   yscrollcommand=self.text_scroll.set)
-        self.text_scroll.config(command=self.text_widget.yview)
+                                   yscrollcommand=self.sync_scroll)
+        self.text_scroll.config(command=self.on_text_scroll)
 
         self.text_scroll.pack(side="right", fill="y")
         self.text_widget.pack(side="left", fill="both", expand=True)
@@ -120,6 +151,47 @@ class CodingTutorApp(tk.Tk):
         self.text_widget.tag_config("incorrect", foreground=self.red_color, background=self.red_bg)
         
         self.text_widget.bind("<KeyPress>", self.handle_keypress)
+        self.text_widget.bind("<MouseWheel>", self.on_mousewheel)
+        self.text_widget.bind("<Button-4>", self.on_mousewheel)
+        self.text_widget.bind("<Button-5>", self.on_mousewheel)
+
+    def sync_scroll(self, *args):
+        """Synchronize main text and line number scrolling."""
+        self.text_scroll.set(*args)
+        self.on_text_scroll('moveto', args[0])
+
+    def on_text_scroll(self, *args):
+        """Handle scroll for both widgets."""
+        self.text_widget.yview(*args)
+        self.line_numbers_widget.yview(*args)
+
+    def on_mousewheel(self, event):
+        """Handle mouse wheel scrolling."""
+        if event.num == 4:
+            self.text_widget.yview_scroll(-1, "units")
+            self.line_numbers_widget.yview_scroll(-1, "units")
+        elif event.num == 5:
+            self.text_widget.yview_scroll(1, "units")
+            self.line_numbers_widget.yview_scroll(1, "units")
+        else:
+            self.text_widget.yview_scroll(-1 * (event.delta // 120), "units")
+            self.line_numbers_widget.yview_scroll(-1 * (event.delta // 120), "units")
+        return "break"
+
+    def update_line_numbers(self):
+        """Update the line numbers display."""
+        self.line_numbers_widget.config(state="normal")
+        self.line_numbers_widget.delete("1.0", tk.END)
+        
+        if self.show_line_numbers.get():
+            total_lines = self.target_text.count('\n') + 1
+            numbers = '\n'.join(str(i) for i in range(1, total_lines + 1))
+            self.line_numbers_widget.insert("1.0", numbers)
+            self.line_numbers_widget.config(width=4, padx=2)
+        else:
+            self.line_numbers_widget.config(width=0, padx=0)
+        
+        self.line_numbers_widget.config(state="disabled")
 
     def toggle_sidebar(self):
         if self.sidebar_visible:
@@ -205,11 +277,19 @@ class CodingTutorApp(tk.Tk):
         except Exception as e:
             content = f"Error loading file:\n{e}"
 
+        # Normalize whitespace-only lines to truly empty lines
+        lines = content.split('\n')
+        for i in range(len(lines)):
+            if lines[i].strip() == '':
+                lines[i] = ''
+        content = '\n'.join(lines)
+
         # Reset state for new file
         self.current_filepath = filepath
         self.target_text = content
         self.current_index = 0
         self.has_error = False
+        self.error_count = 0
         self.is_completed = False
         self.next_file_path = None
         self.skip_intervals = []
@@ -245,17 +325,27 @@ class CodingTutorApp(tk.Tk):
         self.text_widget.insert("1.0", self.target_text)
         self.text_widget.tag_add("ghost", "1.0", tk.END)
         
-        # --- Whitespace Background Highlighting ---
-        for i, char in enumerate(self.target_text):
-            if char == ' ':
-                self.text_widget.tag_add("space_mark", f"1.0 + {i} chars")
-            elif char == '\t':
-                self.text_widget.tag_add("tab_mark", f"1.0 + {i} chars")
+        # --- Whitespace Background Highlighting (skip empty lines) ---
+        lines = self.target_text.split('\n')
+        char_index = 0
+        for line_num, line in enumerate(lines):
+            if line.strip() == '':
+                char_index += len(line) + 1
+                continue
+            for char in line:
+                if char == ' ':
+                    self.text_widget.tag_add("space_mark", f"1.0 + {char_index} chars")
+                elif char == '\t':
+                    self.text_widget.tag_add("tab_mark", f"1.0 + {char_index} chars")
+                char_index += 1
+            char_index += 1
         
         self.text_widget.mark_set("insert", "1.0")
         self.text_widget.focus_set()
         
+        self.update_line_numbers()
         self.check_auto_skip()
+        self.update_display_options()
 
     def check_auto_skip(self):
         """Automatically leaps over detected comment blocks, marking them correct."""
@@ -272,6 +362,7 @@ class CodingTutorApp(tk.Tk):
                     self.text_widget.tag_add("correct", pos_start, pos_end)
                     
                     self.current_index = end
+                    self.update_progress_display()
                     self.text_widget.mark_set("insert", f"1.0 + {self.current_index} chars")
                     self.text_widget.see("insert")
                     moved = True
@@ -290,6 +381,23 @@ class CodingTutorApp(tk.Tk):
         
         hex_color = f"#{r:02x}{g:02x}{b:02x}"
         self.text_widget.tag_config("ghost", foreground=hex_color)
+
+    def update_display_options(self):
+        """Update line numbers, progress, and percentage display."""
+        self.update_line_numbers()
+        self.update_progress_display()
+
+    def update_progress_display(self):
+        """Call this whenever current_index changes to update the info label."""
+        info_parts = []
+        if self.show_line_progress.get():
+            current_line = self.target_text[:self.current_index].count('\n') + 1
+            total_lines = self.target_text.count('\n') + 1
+            info_parts.append(f"Line {current_line} of {total_lines}")
+        if self.show_percent.get():
+            percent = int((self.current_index / max(len(self.target_text), 1)) * 100)
+            info_parts.append(f"{percent}%")
+        self.info_label.config(text="  |  ".join(info_parts) if info_parts else "")
 
     def get_next_file(self, search_from_path):
         if not search_from_path:
@@ -339,6 +447,11 @@ class CodingTutorApp(tk.Tk):
         tk.Label(self.overlay_frame, text="File Complete! 🎉", font=("Consolas", 18, "bold"), 
                  bg="#252526", fg=self.green_color).pack(pady=(0, 15))
         
+        # Show error count if there were any mistakes
+        if self.error_count > 0:
+            tk.Label(self.overlay_frame, text=f"Failed {self.error_count} times", 
+                     font=("Consolas", 12), bg="#252526", fg=self.red_color).pack(pady=(0, 10))
+        
         if self.next_file_path:
             filename = os.path.basename(self.next_file_path)
             tk.Label(self.overlay_frame, text=f"Next up: {filename}", font=("Consolas", 12), 
@@ -361,10 +474,9 @@ class CodingTutorApp(tk.Tk):
     def handle_keypress(self, event):
         if self.is_completed:
             if event.keysym == 'Return' and self.next_file_path:
-                self.select_file_in_tree(self.next_file_path)  # ← NEW
+                self.select_file_in_tree(self.next_file_path)
                 self.load_file(self.next_file_path)
             elif event.keysym.lower() == 's' and self.next_file_path:
-                self.select_file_in_tree(self.next_file_path)  # ← NEW
                 self.show_completion_overlay(search_from_path=self.next_file_path)
             elif event.keysym == 'Escape':
                 self.close_overlay()
@@ -405,6 +517,7 @@ class CodingTutorApp(tk.Tk):
                             
                 if not skipped_block and self.current_index > 0:
                     self.current_index -= 1
+                    self.update_progress_display()
                     pos = f"1.0 + {self.current_index} chars"
                     self.text_widget.tag_remove("correct", pos, f"{pos} + 1 char")
                     self.text_widget.tag_remove("incorrect", pos, f"{pos} + 1 char")
@@ -432,6 +545,7 @@ class CodingTutorApp(tk.Tk):
             self.text_widget.tag_add("correct", pos, f"{pos} + 1 char")
             self.has_error = False
             self.current_index += 1
+            self.update_progress_display()
             
             self.check_auto_skip()
                 
@@ -439,6 +553,7 @@ class CodingTutorApp(tk.Tk):
             self.text_widget.tag_remove("ghost", pos, f"{pos} + 1 char")
             self.text_widget.tag_add("incorrect", pos, f"{pos} + 1 char")
             self.has_error = True
+            self.error_count += 1
 
         next_pos = f"1.0 + {self.current_index} chars"
         self.text_widget.mark_set("insert", next_pos)
