@@ -21,6 +21,7 @@ Si alguna vez te has quedado en blanco durante un examen de programación estric
 *   **🧠 Ordenamiento Inteligente:** Lógica personalizada para asegurar que practiques tus cabeceras (`.h`/`.hpp`) *antes* que tus archivos de implementación (`.c`/`.cpp`).
 *   **🚀 Flujo Continuo:** Al terminar un archivo, una ventana sugiere el siguiente archivo lógico. Presiona `[Enter]` para continuar, o `[S]` para saltar al siguiente, manteniendo siempre el archivo seleccionado en el sidebar.
 *   **📊 Seguimiento de Progreso:** Indicadores en tiempo real que muestran tu línea actual, el progreso de caracteres escritos y una barra de porcentaje para que sepas exactamente cuánto te falta.
+*   **❌ Registro de Errores:** Al finalizar cada archivo, verás un resumen detallado en rojo con el **número total de errores** cometidos, para que puedas medir tu precisión.
 *   **📂 Acceso Rápido:** Al hacer clic en "Open Folder", el selector se abre por defecto directamente en tu **Escritorio (Desktop)** para que empieces a trabajar de inmediato.
 
 ## 🛠️ Cómo usarlo
