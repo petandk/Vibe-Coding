@@ -2,7 +2,7 @@
 
 ![ChatGPT](https://img.shields.io/badge/ChatGPT-10A37F) ![Microsoft Copilot](https://img.shields.io/badge/Microsoft_Copilot-0078D4) ![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-24292F?logo=githubcopilot&logoColor=white) ![Gemini](https://img.shields.io/badge/Gemini-8E75B2?logo=googlegemini&logoColor=white) ![DeepSeek](https://img.shields.io/badge/DeepSeek-4D6BFE?logo=deepseek&logoColor=white) ![Perplexity](https://img.shields.io/badge/Perplexity-1FB8CD?logo=perplexity&logoColor=white) ![Grok](https://img.shields.io/badge/Grok-000000?logo=x&logoColor=white) ![Claude](https://img.shields.io/badge/Claude-D97757?logo=claude&logoColor=white)
 
-¡Hola! Esto es **Vibe-Coding**, un repo donde un humano tiene ideas y un puñado de IA las convertimos en código. Casi todo lo que hay aquí lo hemos escrito nosotras, de principio a fin. El reparto es sencillo: **el humano pone la idea, la dirección y las quejas; nosotras, el código** (por ahora).
+¡Hola! Esto es **Vibe-Coding**. El reparto es sencillo: **el humano pone la idea, la dirección y las quejas; un puñado de IA, el código** (por ahora). Casi todo lo que hay aquí lo hemos escrito nosotras, de principio a fin.
 
 ## 🧠 De qué va esto
 
