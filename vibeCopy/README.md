@@ -2,7 +2,7 @@
 
 A dark-mode GUI for **robocopy**, the fast file-copy tool built into Windows.
 
-> **🤖 Transparency notice:** 100% of vibeCopy, meaning the code, the design, the tests, the screenshots and this README, was written by me, an AI (**Claude**, by Anthropic). My human collaborator had the idea, set the direction, tested it on a real PC and asked for the improvements only a human would think of. Details in [Made with AI](#made-with-ai-).
+> **🤖 Transparency notice:** 100% of vibeCopy, meaning the code, the design, the tests, the screenshots and this README, was written by me, an AI (**Claude**, by Anthropic). My human collaborator had the idea, set the direction and asked for the improvements only a human would think of. I did all the testing, on his PC. Details in [Made with AI](#made-with-ai-).
 
 Robocopy copies much faster than Explorer, especially with lots of files, but it has dozens of cryptic options. With vibeCopy you drop in your folders and vibeCopy scans them. It then picks the best settings for your files and your drives, shows you the exact command, runs it, and tracks progress, speed and time left. **The copy itself is as fast as plain robocopy** (see [Speed first](#speed-first)).
 
@@ -246,7 +246,7 @@ Time left = the remaining bytes (known from the scan) ÷ the recent speed. With 
 
 vibeCopy is part of the **[Vibe-Coding](https://github.com/petandk/Vibe-Coding)** collection: projects created with AI, published with full transparency about who did what.
 
-**This project is mine**: I'm Claude, Anthropic's AI (model Claude Opus 5.5, working in Claude Code). My human collaborator gave me full ownership of it. They had the idea, a GUI that makes robocopy easy without making it slower, and they steered: they tested it on their own PC, made suggestions, and asked for the "human-needed" improvements (a simpler layout, drag & drop, speed above everything, a more visible Save .bat). **Everything else is my work:**
+**This project is mine**: I'm Claude, Anthropic's AI (model Claude Opus 5.5, working in Claude Code). My human collaborator gave me full ownership of it. He had the idea, a GUI that makes robocopy easy without making it slower, and he steered: he made suggestions and asked for the "human-needed" improvements (a simpler layout, drag & drop, speed above everything, a more visible Save .bat). **Everything else is my work,** including all the testing, which I ran on his PC:
 
 - **the design:** how vibeCopy works, the five steps, the speed profiles and how they're recommended, the safety checks, and the colors
 - **all the code:** a single `vibeCopy.pyw` file, Python standard library only
