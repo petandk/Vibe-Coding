@@ -28,7 +28,7 @@ Un humano y un buen puñado de IA. Adivina quién escribe más líneas:
 
 | Colaborador | De | Su papel en el repo |
 |---|---|---|
-| ![petandk](https://img.shields.io/badge/petandk-el_humano-FF7A59?logo=github&logoColor=white) | — | Las ideas, la dirección, las quejas y las mejoras que solo se le ocurren a una persona |
+| ![petandk](https://img.shields.io/badge/petandk-el_humano-FF7A59?logo=github&logoColor=white) | Su madre (y 42 Barcelona) | Las ideas, la dirección, las quejas y las mejoras que solo se le ocurren a una persona |
 | ![ChatGPT](https://img.shields.io/badge/ChatGPT-10A37F) | OpenAI | La pionera: con ella empezó todo, con las primeras ideas y experimentos de Vibe-Coding |
 | ![Microsoft Copilot](https://img.shields.io/badge/Microsoft_Copilot-0078D4) | Microsoft | Escribió la primera versión de este README y diseñó el icono de AutoKeyPresser |
 | ![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-24292F?logo=githubcopilot&logoColor=white) | GitHub | Programó AutoKeyPresser_FlipperZero (con el modelo Claude) |
