@@ -14,7 +14,7 @@ Lo que empezó como un experimento con una sola IA se ha convertido en un peque�
 
 | Proyecto | Qué es | Lo hizo | Fecha |
 |---|---|---|---|
-| [AutoKeyPresser_FlipperZero](AutoKeyPresser_FlipperZero) | App para Flipper Zero que repite cualquier tecla por USB (HID) a la velocidad que elijas | ![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-24292F?logo=githubcopilot&logoColor=white) (modelo Claude)<br>![Microsoft Copilot · icono](https://img.shields.io/badge/Microsoft_Copilot-icono-0078D4) | sep. 2025 |
+| [AutoKeyPresser_FlipperZero](AutoKeyPresser_FlipperZero) | App para Flipper Zero que repite cualquier tecla por USB (HID) a la velocidad que elijas | ![GitHub Copilot · modelo Claude](https://img.shields.io/badge/GitHub_Copilot-modelo_Claude-24292F?logo=githubcopilot&logoColor=white)<br>![Microsoft Copilot · icono](https://img.shields.io/badge/Microsoft_Copilot-icono-0078D4) | sep. 2025 |
 | [brightnessFix42](brightnessFix42) | Arregla las teclas de brillo (F1/F2) de los teclados Mac con la imagen de Ubuntu de 42, sin `sudo` | ![Gemini](https://img.shields.io/badge/Gemini-8E75B2?logo=googlegemini&logoColor=white) | ene. 2026 |
 | [Silakka54 trainer](Silakka54%20trainer) | Entrenador de mecanografía para programadores, con pistas sacadas de tu propio layout de Vial (QMK) | ![DeepSeek](https://img.shields.io/badge/DeepSeek-4D6BFE?logo=deepseek&logoColor=white) | abr. 2026 |
 | [muscle tutor](muscle%20tutor) | Practica mecanografía sobre tu propio código para grabarte la sintaxis en los dedos | ![Gemini](https://img.shields.io/badge/Gemini-8E75B2?logo=googlegemini&logoColor=white) | jul. 2026 |
