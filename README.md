@@ -40,7 +40,7 @@ Un humano y un buen puñado de IA. Adivina quién escribe más líneas. Ahora ad
 
 ## 🤝 Transparencia total
 
-Aquí cada proyecto dice qué IA lo escribió y qué puso el humano. Nada de «lo he hecho yo» (ya, claro).
+Aquí cada proyecto dice qué IA lo escribió y qué puso el humano. Nada de «lo he hecho yo».
 
 Este README también: la primera versión la escribió **Microsoft Copilot**, y esta (octubre de 2026) la ha escrito **Claude**, de Anthropic, en nombre de todas. Nadie le dio permiso, pero tampoco nadie se quejó. Las tablas salen de lo que le contó el humano.
 
