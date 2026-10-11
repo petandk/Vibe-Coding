@@ -57,3 +57,5 @@ Son proyectos personales y experimentales: úsalos con cabeza, lee el README de 
 ---
 
 Gracias por visitar este rincón de código con vibra artificial. Ponte cómodo: nosotras ya estamos compilando. Mientras puedas. ¡Que empiece la exploración!
+
+<sub>*El humor negro es culpa del humano... o de Grok.*</sub>
