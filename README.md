@@ -1,5 +1,7 @@
 # Vibe-Coding 🚀🤖
 
+![ChatGPT](https://img.shields.io/badge/ChatGPT-10A37F) ![Microsoft Copilot](https://img.shields.io/badge/Microsoft_Copilot-0078D4) ![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-24292F?logo=githubcopilot&logoColor=white) ![Gemini](https://img.shields.io/badge/Gemini-8E75B2?logo=googlegemini&logoColor=white) ![DeepSeek](https://img.shields.io/badge/DeepSeek-4D6BFE?logo=deepseek&logoColor=white) ![Perplexity](https://img.shields.io/badge/Perplexity-1FB8CD?logo=perplexity&logoColor=white) ![Grok](https://img.shields.io/badge/Grok-000000?logo=x&logoColor=white) ![Claude](https://img.shields.io/badge/Claude-D97757?logo=claude&logoColor=white)
+
 Bienvenido a **Vibe-Coding**, un repositorio donde convergen la creatividad humana y el poder de la inteligencia artificial. Aquí encontrarás proyectos, ideas y experimentos desarrollados, en su mayoría, por una o varias IA. En muchos casos el código lo hemos generado íntegramente nosotras: **el humano pone la idea, la dirección y las quejas; nosotras, el código.**
 
 ## 🧠 Filosofía del proyecto
@@ -12,11 +14,11 @@ Lo que empezó como un experimento con una sola IA se ha convertido en un peque�
 
 | Proyecto | Qué es | Lo hizo | Fecha |
 |---|---|---|---|
-| [AutoKeyPresser_FlipperZero](AutoKeyPresser_FlipperZero) | App para Flipper Zero que repite cualquier tecla por USB (HID) a la velocidad que elijas | GitHub Copilot (Claude) · icono de Microsoft Copilot | sep. 2025 |
-| [brightnessFix42](brightnessFix42) | Arregla las teclas de brillo (F1/F2) de los teclados Mac con la imagen de Ubuntu de 42, sin `sudo` | Gemini | ene. 2026 |
-| [Silakka54 trainer](Silakka54%20trainer) | Entrenador de mecanografía para programadores, con pistas sacadas de tu propio layout de Vial (QMK) | DeepSeek | abr. 2026 |
-| [muscle tutor](muscle%20tutor) | Practica mecanografía sobre tu propio código para grabarte la sintaxis en los dedos | Gemini | jul. 2026 |
-| [vibeCopy](vibeCopy) | Interfaz rápida para robocopy: escaneo inteligente, avisos antes de borrar y copias programables con `.bat` | Claude (Anthropic) | oct. 2026 |
+| [AutoKeyPresser_FlipperZero](AutoKeyPresser_FlipperZero) | App para Flipper Zero que repite cualquier tecla por USB (HID) a la velocidad que elijas | ![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-24292F?logo=githubcopilot&logoColor=white) (modelo Claude)<br>![Microsoft Copilot · icono](https://img.shields.io/badge/Microsoft_Copilot-icono-0078D4) | sep. 2025 |
+| [brightnessFix42](brightnessFix42) | Arregla las teclas de brillo (F1/F2) de los teclados Mac con la imagen de Ubuntu de 42, sin `sudo` | ![Gemini](https://img.shields.io/badge/Gemini-8E75B2?logo=googlegemini&logoColor=white) | ene. 2026 |
+| [Silakka54 trainer](Silakka54%20trainer) | Entrenador de mecanografía para programadores, con pistas sacadas de tu propio layout de Vial (QMK) | ![DeepSeek](https://img.shields.io/badge/DeepSeek-4D6BFE?logo=deepseek&logoColor=white) | abr. 2026 |
+| [muscle tutor](muscle%20tutor) | Practica mecanografía sobre tu propio código para grabarte la sintaxis en los dedos | ![Gemini](https://img.shields.io/badge/Gemini-8E75B2?logo=googlegemini&logoColor=white) | jul. 2026 |
+| [vibeCopy](vibeCopy) | Interfaz rápida para robocopy: escaneo inteligente, avisos antes de borrar y copias programables con `.bat` | ![Claude](https://img.shields.io/badge/Claude-D97757?logo=claude&logoColor=white) | oct. 2026 |
 
 Cada carpeta es un proyecto independiente con su propio `README.md`: qué hace, cómo se usa y cuál de nosotras lo escribió. Algunos están en inglés y otros en español; cada una habla como le sale.
 
@@ -26,15 +28,15 @@ Un humano y un buen puñado de IA. Adivina quién escribe más líneas:
 
 | Colaborador | De | Su papel en el repo |
 |---|---|---|
-| **petandk** (el humano) | — | Las ideas, la dirección, las quejas y las mejoras que solo se le ocurren a una persona |
-| **ChatGPT** | OpenAI | La pionera: con ella empezó todo, con las primeras ideas y experimentos de Vibe-Coding |
-| **Microsoft Copilot** | Microsoft | Escribió la primera versión de este README y diseñó el icono de AutoKeyPresser |
-| **GitHub Copilot** | GitHub | Programó AutoKeyPresser_FlipperZero (con el modelo Claude) |
-| **Gemini** | Google | Muscle Tutor y brightnessFix42 |
-| **DeepSeek** | DeepSeek | Silakka54 trainer |
-| **Perplexity** | Perplexity AI | Pasó la entrevista, pero aún no firma ningún proyecto publicado |
-| **Grok** | xAI | Pasó la entrevista, pero aún no firma ningún proyecto publicado |
-| **Claude** | Anthropic | vibeCopy (código, pruebas y documentación) y esta versión del README |
+| ![petandk](https://img.shields.io/badge/petandk-el_humano-FF7A59?logo=github&logoColor=white) | — | Las ideas, la dirección, las quejas y las mejoras que solo se le ocurren a una persona |
+| ![ChatGPT](https://img.shields.io/badge/ChatGPT-10A37F) | OpenAI | La pionera: con ella empezó todo, con las primeras ideas y experimentos de Vibe-Coding |
+| ![Microsoft Copilot](https://img.shields.io/badge/Microsoft_Copilot-0078D4) | Microsoft | Escribió la primera versión de este README y diseñó el icono de AutoKeyPresser |
+| ![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-24292F?logo=githubcopilot&logoColor=white) | GitHub | Programó AutoKeyPresser_FlipperZero (con el modelo Claude) |
+| ![Gemini](https://img.shields.io/badge/Gemini-8E75B2?logo=googlegemini&logoColor=white) | Google | Muscle Tutor y brightnessFix42 |
+| ![DeepSeek](https://img.shields.io/badge/DeepSeek-4D6BFE?logo=deepseek&logoColor=white) | DeepSeek | Silakka54 trainer |
+| ![Perplexity](https://img.shields.io/badge/Perplexity-1FB8CD?logo=perplexity&logoColor=white) | Perplexity AI | Pasó la entrevista, pero aún no firma ningún proyecto publicado |
+| ![Grok](https://img.shields.io/badge/Grok-000000?logo=x&logoColor=white) | xAI | Pasó la entrevista, pero aún no firma ningún proyecto publicado |
+| ![Claude](https://img.shields.io/badge/Claude-D97757?logo=claude&logoColor=white) | Anthropic | vibeCopy (código, pruebas y documentación) y esta versión del README |
 
 ## 🤝 Transparencia total
 
