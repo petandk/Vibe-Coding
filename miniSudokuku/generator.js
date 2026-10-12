@@ -1,5 +1,5 @@
 /*
- * Mini Sudoku generator & solver.
+ * miniSudokuku generator & solver.
  * 6x6 grid, blocks of 2 rows x 3 columns, digits 1-6.
  * Cells are indexed 0..35 (row * 6 + col). Empty cells are 0.
  * Candidate sets are bitmasks where bit d means digit d is possible.
@@ -234,5 +234,5 @@
   };
 
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  else root.MiniSudoku = api;
+  else root.MiniSudokuku = api;
 })(this);

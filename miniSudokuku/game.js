@@ -1,10 +1,10 @@
 (function () {
   'use strict';
 
-  const G = window.MiniSudoku;
+  const G = window.MiniSudokuku;
   const { CELLS, PEERS, DIFFICULTIES, rowOf, colOf, boxOf } = G;
   const HINT_PENALTY_MS = 15000;
-  const KEYS = { stats: 'minisudoku.stats.v1', game: 'minisudoku.game.v1', prefs: 'minisudoku.prefs.v1' };
+  const KEYS = { stats: 'minisudokuku.stats.v1', game: 'minisudokuku.game.v1', prefs: 'minisudokuku.prefs.v1' };
 
   const $ = sel => document.querySelector(sel);
   const store = {
@@ -15,6 +15,16 @@
     set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* storage unavailable */ } },
     remove(key) { try { localStorage.removeItem(key); } catch { /* storage unavailable */ } },
   };
+
+  // Carry over data saved under the old "minisudoku.*" keys.
+  for (const key of Object.values(KEYS)) {
+    try {
+      const old = key.replace('minisudokuku.', 'minisudoku.');
+      const raw = localStorage.getItem(old);
+      if (raw !== null && localStorage.getItem(key) === null) localStorage.setItem(key, raw);
+      localStorage.removeItem(old);
+    } catch { /* storage unavailable */ }
+  }
 
   const prefs = Object.assign({ difficulty: 'easy', conflicts: true }, store.get(KEYS.prefs, {}));
   let stats = store.get(KEYS.stats, {});
