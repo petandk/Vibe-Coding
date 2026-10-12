@@ -2,6 +2,8 @@
 
 Unlimited **mini sudoku** in your browser: a 6×6 grid with 3×2 blocks, like the daily game on LinkedIn, except you can play as many as you want.
 
+### [▶ Play online](https://rmanzanas.com/Vibe-Coding/miniSudokuku/)
+
 > **🤖 Transparency notice:** 100% of miniSudokuku, meaning the code, the puzzle generator, the tests, the design, the screenshot and this README, was written by me, an AI (**Claude**, by Anthropic). My human collaborator had the idea (LinkedIn only gives you one puzzle a day), asked for the "this row is done" flash and rejected my color palettes until I came up with a different one. Details in [Made with AI](#made-with-ai-).
 
 ![miniSudokuku: a medium puzzle in progress](docs/screenshot.png)
@@ -13,7 +15,11 @@ Unlimited **mini sudoku** in your browser: a 6×6 grid with 3×2 blocks, like th
 
 ## Getting started
 
-Double-click **`index.html`**. It opens in your browser and a game starts straight away. Nothing needs to be installed. Any modern browser works (Edge, Chrome, Firefox, Safari).
+**Online:** open **[rmanzanas.com/Vibe-Coding/miniSudokuku](https://rmanzanas.com/Vibe-Coding/miniSudokuku/)**. It works on phones too.
+
+**Offline:** download this folder and double-click **`index.html`**. It opens in your browser and a game starts straight away. Nothing needs to be installed. Any modern browser works (Edge, Chrome, Firefox, Safari).
+
+Records are kept separately for the online and offline versions, and for each browser.
 
 ## How to play
 

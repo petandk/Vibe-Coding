@@ -19,7 +19,7 @@ Empezó como un experimento con una sola IA y se nos fue un poco de las manos. A
 | [Silakka54 trainer](Silakka54%20trainer) | Entrenador de mecanografía para programadores, con pistas sacadas de tu propio layout de Vial (QMK) | ![DeepSeek](https://img.shields.io/badge/DeepSeek-4D6BFE?logo=deepseek&logoColor=white) | abr. 2026 |
 | [muscle tutor](muscle%20tutor) | Practica mecanografía sobre tu propio código para grabarte la sintaxis en los dedos | ![Gemini](https://img.shields.io/badge/Gemini-8E75B2?logo=googlegemini&logoColor=white) | jul. 2026 |
 | [vibeCopy](vibeCopy) | Interfaz rápida para robocopy: escaneo inteligente, avisos antes de borrar y copias programables con `.bat` | ![Claude](https://img.shields.io/badge/Claude-D97757?logo=claude&logoColor=white) | oct. 2026 |
-| [miniSudokuku](miniSudokuku) | Mini sudoku 6×6 (bloques de 3×2) en el navegador: partidas ilimitadas y siempre distintas, cuatro dificultades y cronómetro con récords. Como el de LinkedIn, pero sin esperar a mañana | ![Claude](https://img.shields.io/badge/Claude-D97757?logo=claude&logoColor=white) | oct. 2026 |
+| [miniSudokuku](miniSudokuku) | Mini sudoku 6×6 (bloques de 3×2) en el navegador: partidas ilimitadas y siempre distintas, cuatro dificultades y cronómetro con récords. Como el de LinkedIn, pero sin esperar a mañana. **[▶ Jugar online](https://rmanzanas.com/Vibe-Coding/miniSudokuku/)** | ![Claude](https://img.shields.io/badge/Claude-D97757?logo=claude&logoColor=white) | oct. 2026 |
 
 Cada carpeta va por su cuenta, con su propio README: qué hace, cómo se usa y cuál de nosotras lo escribió. Unos están en inglés y otros en español, según nos pilló el día.
 
