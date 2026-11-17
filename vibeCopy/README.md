@@ -34,6 +34,8 @@ The line under each path says whether the folder exists (or *will be created*) a
 - **Files:** what to copy, e.g. `*.jpg *.png`. The default `*.*` means everything.
 - **Exclude files / Exclude folders:** what to skip, e.g. `Thumbs.db *.tmp` or `node_modules .git`.
 
+**To copy a single file,** type its name in **Files**. If the file is directly in the source folder, quotes, the extension and capitals don't matter: `summer trip` finds `Summer Trip.mp4`. With a Files filter, only subfolders that contain a matching file are created (`/S` instead of `/E`), so you don't get an empty copy of the whole folder tree. Untick **Include subfolders** if the file sits directly in the source folder: it's faster, and a file with the same name in a subfolder won't come along.
+
 **Dropping** a folder on a row fills that row. Dropped anywhere else, it fills the first empty field, or vibeCopy asks which one. Dropping a **file** as the source copies only that file. Its folder becomes the source, and the filter is cleared again if you change the source later.
 
 Once both folders are valid, the **scan** runs in the background. It counts what needs copying and checks your drives.
@@ -51,7 +53,7 @@ You always choose the action yourself. vibeCopy never picks it for you.
 | **Mirror** ⚠ | `/MIR` | Makes the destination an exact copy of the source. **Deletes** destination files that aren't in the source. |
 | **Move** ⚠ | `/E /MOVE` | Copies, then **deletes** the files from the source. |
 
-**Include subfolders** (`/E`) is on by default. Mirror and Move always ask for confirmation.
+**Include subfolders** (`/E`) is on by default. With a Files filter it becomes `/S`: only subfolders that contain a matching file. Mirror and Move always ask for confirmation.
 
 ### 3 · Speed profile: how to copy fast
 
@@ -130,6 +132,7 @@ The Log opens when you press Run. It shows robocopy's output: errors in red, war
 - **Progress:** progress, speed, time left, files, data and failed files. Click *Failed* for details. The taskbar button shows the progress too.
 - **When done:** *Do nothing*, *Sleep* or *Shut down*, after a 60-second countdown you can cancel.
 - **While copying,** your PC doesn't go to sleep.
+- **Copying from the top of a drive** (e.g. `E:\`) makes robocopy mark the destination folder as hidden, so it disappears from Explorer. vibeCopy makes it visible again after the copy, and says so in the Log. A folder you hid yourself stays hidden.
 
 ## Save as .bat: reuse and schedule a copy
 
@@ -139,7 +142,7 @@ The Log opens when you press Run. It shows robocopy's output: errors in red, war
 - **Double-click it** to run the same copy again, e.g. "update my backup drive".
 - **Schedule it,** and Windows runs it every night, every week or at sign-in.
 
-The file is named after the source (`vibeCopy - Photos.bat`) and is plain text. To change a setting, save a new one or edit it in Notepad. For **Mirror** and **Move**, vibeCopy asks first and writes a `WARNING` line into the file, because they delete files every time the .bat runs.
+The file is named after the source (`vibeCopy - Photos.bat`) and is plain text. To change a setting, save a new one or edit it in Notepad. For **Mirror** and **Move**, vibeCopy asks first and writes a `WARNING` line into the file, because they delete files every time the .bat runs. When the source is the top of a drive, the .bat also unhides the destination folder afterwards (`attrib -h -s`).
 
 ### Run it on a schedule
 
@@ -206,6 +209,8 @@ vibeCopy is part of the **[Vibe-Coding](https://github.com/petandk/Vibe-Coding)*
 - `/UNICODE` is broken through a pipe
 - `/UNILOG+` writes non-Unicode text into a new file
 - the summary's columns run together once numbers reach 10 digits
+- copying from a drive root (`E:\`) hides the destination folder (Hidden + System)
+- `/E` with a file filter still creates every empty subfolder
 
 **Please keep in mind:**
 - This is an AI-built hobby project, not a commercial product. It was tested on one Windows 11 PC (NVMe SSD and USB hard disk). Network shares were only tested for the "offline" case, drag & drop with simulated drops, and Windows 10 not at all.
@@ -242,4 +247,5 @@ Codes 1, 2 and 4 combine. For example, 3 means files were copied *and* the desti
 - **"Backup mode needs Administrator."** Untick *Backup mode*, or run vibeCopy as administrator.
 - **The copy seems stuck on one file.** That file is probably locked by another program. It fails after the retries, and the copy continues.
 - **"Something went wrong" window.** That's an unexpected error. A running copy keeps going. Use **Copy details** to report it.
+- **A copied-to folder vanished from Explorer.** It's still there, just hidden: robocopy does that when the source is the top of a drive. vibeCopy fixes it automatically now. For older copies, run `attrib -h -s "H:\Your Folder"` in a terminal.
 - **Robocopy's messages are in another language.** That's normal: robocopy uses your Windows language, and vibeCopy works with any language.

@@ -163,7 +163,7 @@ SCHEDULE_TIPS = [
 
 TIPS = dict(
     files="Which files to copy. Wildcards, separated by spaces: *.jpg *.png\nLeave *.* for everything.\n"
-          "A single file name works too (with or without its extension): la odisea.mp4\n"
+          "A single file name works too (with or without its extension): weekend.mp4\n"
           "With a filter, only subfolders that contain a matching file are copied.",
     xf="Files to skip (/XF). Wildcards or names, separated by spaces: *.tmp ~$* Thumbs.db",
     xd="Folders to skip (/XD). Names or full paths, separated by spaces: node_modules .git \"My Temp\"",
@@ -214,7 +214,7 @@ def split_patterns(text):
 
 def file_patterns(o):
     """The Files filter as robocopy patterns. A file name typed without quotes or without its extension
-    ('la odisea' for 'la odisea.mp4') would otherwise become two patterns that match nothing."""
+    ('summer trip' for 'summer trip.mp4') would otherwise become two patterns that match nothing."""
     text = (o["files"] or "").strip()
     name = text.strip('"')
     src = norm_path(o["src"])
