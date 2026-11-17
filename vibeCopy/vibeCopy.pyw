@@ -162,10 +162,13 @@ SCHEDULE_TIPS = [
 ]
 
 TIPS = dict(
-    files="Which files to copy. Wildcards, separated by spaces: *.jpg *.png\nLeave *.* for everything.",
+    files="Which files to copy. Wildcards, separated by spaces: *.jpg *.png\nLeave *.* for everything.\n"
+          "A single file name works too (with or without its extension): la odisea.mp4\n"
+          "With a filter, only subfolders that contain a matching file are copied.",
     xf="Files to skip (/XF). Wildcards or names, separated by spaces: *.tmp ~$* Thumbs.db",
     xd="Folders to skip (/XD). Names or full paths, separated by spaces: node_modules .git \"My Temp\"",
-    subdirs="/E: include all subfolders (even empty ones). Off = only the files directly in the source folder.",
+    subdirs="/E: include all subfolders (even empty ones). Off = only the files directly in the source folder.\n"
+            "With a Files filter it uses /S instead: only subfolders that contain a matching file.",
     threads="/MT: how many files are copied at the same time.\n"
             "1 = classic mode with live % inside each file (best for a few huge files).\n"
             "Higher = faster for many files, but progress moves in steps.",
@@ -209,6 +212,24 @@ def split_patterns(text):
     return [a or b for a, b in re.findall(r'"([^"]*)"|([^\s;]+)', text or "")]
 
 
+def file_patterns(o):
+    """The Files filter as robocopy patterns. A file name typed without quotes or without its extension
+    ('la odisea' for 'la odisea.mp4') would otherwise become two patterns that match nothing."""
+    text = (o["files"] or "").strip()
+    name = text.strip('"')
+    src = norm_path(o["src"])
+    if src and name and '"' not in name and not any(c in name for c in "*?;") and os.path.isdir(src):
+        if os.path.isfile(os.path.join(src, name)):
+            return [name]
+        try:
+            if any(os.path.splitext(f)[0].lower() == name.lower() and os.path.isfile(os.path.join(src, f))
+                   for f in os.listdir(src)):
+                return [name + ".*"]
+        except OSError:
+            pass
+    return split_patterns(text)
+
+
 def norm_path(p):
     p = (p or "").strip().strip('"').strip()
     if not p:
@@ -222,17 +243,20 @@ def build_args(o, scan=False):
     """Robocopy argument list. With scan=True: the list-only scan, which contains only the options
     that change WHICH files are copied (so it can also serve as the scan's cache key)."""
     args = ["robocopy", norm_path(o["src"]) or "<source>", norm_path(o["dst"]) or "<destination>"]
-    files = split_patterns(o["files"])
-    if files and files != ["*.*"]:
+    files = file_patterns(o)
+    filtered = bool(files) and files != ["*.*"]
+    if filtered:
         args += files
+    # /E also creates every (empty) subfolder; with a Files filter only folders holding a match are wanted (/S)
+    sub = "/S" if filtered else "/E"
 
     action = o["action"]
     if action == "mirror":
         args.append("/MIR")
     elif action == "move" and not scan:
-        args += ["/E", "/MOVE"] if o["subdirs"] else ["/MOV"]
+        args += [sub, "/MOVE"] if o["subdirs"] else ["/MOV"]
     elif o["subdirs"]:
-        args.append("/E")
+        args.append(sub)
     if action == "update":
         args.append("/XO")
 
@@ -357,6 +381,30 @@ def is_inside(child, parent):
     c = os.path.normcase(os.path.abspath(child))
     p = os.path.normcase(os.path.abspath(parent)).rstrip("\\/") + os.sep
     return c.startswith(p)
+
+
+HIDDEN_SYSTEM = 0x2 | 0x4                             # FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_SYSTEM
+
+
+def is_drive_root(path):
+    p = norm_path(path)
+    return bool(re.fullmatch(r"[A-Za-z]:\\?", p)) or (p.startswith("\\\\") and len(p.strip("\\").split("\\")) <= 2)
+
+
+def hidden_system(path):
+    """True/False for an existing folder, None if it doesn't exist (or can't be read)."""
+    a = ctypes.windll.kernel32.GetFileAttributesW(str(path))
+    return None if a == 0xFFFFFFFF else bool(a & HIDDEN_SYSTEM)
+
+
+def unhide(path):
+    """Robocopy copies the Hidden+System flags of a drive root (E:\\) onto the destination folder, which
+    then vanishes from Explorer. Clear them again (only the folder itself, never its contents)."""
+    k = ctypes.windll.kernel32
+    a = k.GetFileAttributesW(str(path))
+    if a != 0xFFFFFFFF and a & HIDDEN_SYSTEM:
+        return bool(k.SetFileAttributesW(str(path), a & ~HIDDEN_SYSTEM))
+    return False
 
 
 def same_path(a, b):
@@ -888,6 +936,8 @@ class RoboJob(threading.Thread):
 
     def run(self):
         out = []
+        dst = self.args[2]
+        was_hidden = hidden_system(dst) if not is_drive_root(dst) else True
         try:
             self.proc = start_robocopy(self.args)
             if self.cancelled:
@@ -896,6 +946,9 @@ class RoboJob(threading.Thread):
             drain.start()                              # stdout only matters if the log never opens
             got_log = self._follow_log()
             rc = self.proc.wait()
+            if not was_hidden and unhide(dst):         # it wasn't hidden before: robocopy did that
+                self.log(f"Robocopy marked “{dst}” as hidden (it does that when copying from the top of "
+                         f"a drive). vibeCopy made it visible again.", "info")
             drain.join(5)
             if not got_log and out and out[0]:         # e.g. an invalid option: robocopy stops before logging
                 with self.lock:
@@ -2505,8 +2558,8 @@ class App:
             elif is_inside(dst, src) and (o["subdirs"] or o["action"] == "mirror"):
                 self.path_status["dst"].configure(text="✗  Inside the source folder: it would copy into itself",
                                                   fg=C["danger"])
-        f = split_patterns(o["files"])
-        parts = ["all files" if not f or f == ["*.*"] else " ".join(f[:3]) + (" …" if len(f) > 3 else "")]
+        f = file_patterns(o)
+        parts =["all files" if not f or f == ["*.*"] else " ".join(f[:3]) + (" …" if len(f) > 3 else "")]
         if split_patterns(o["xf"]):
             parts.append(f"skip files: {' '.join(split_patterns(o['xf'])[:3])}")
         if split_patterns(o["xd"]):
@@ -2804,9 +2857,11 @@ class App:
         ]
         if o["action"] in DANGER_ACTIONS:
             lines.append(f"rem WARNING: {title} deletes files every time this runs.")
+        lines += [cmd, "set RC=%ERRORLEVEL%"]
+        if is_drive_root(o["src"]) and not is_drive_root(o["dst"]):
+            lines += ["rem Copying from the top of a drive makes robocopy hide the destination folder: unhide it.",
+                      f"attrib -h -s {cmd_quote(norm_path(o['dst']))}".replace("%", "%%")]
         lines += [
-            cmd,
-            "set RC=%ERRORLEVEL%",
             "echo.",
             "if %RC% GEQ 8 (echo Finished with errors - robocopy exit code %RC%) "
             "else (echo Done - robocopy exit code %RC%)",
